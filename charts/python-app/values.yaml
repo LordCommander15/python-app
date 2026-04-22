@@ -1,0 +1,29 @@
+# Application settings
+replicaCount: 1
+
+image:
+  repository: testdid15/python-app
+  tag: "v2"
+  pullPolicy: IfNotPresent
+
+app:
+  name: python-app
+  containerPort: 5000
+
+# Service settings
+service:
+  name: python-service
+  type: ClusterIP
+  port: 8080
+  targetPort: 5000
+
+# Envoy HTTPRoute settings
+gateway:
+  name: my-gateway
+  namespace: envoy-gateway-system
+
+httpRoute:
+  name: python-app-route
+  hostname: "python-app.test.com"
+  pathPrefix: /
+  backendServicePort: 8080
