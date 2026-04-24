@@ -9,6 +9,11 @@ githubConfigUrl: "https://github.com/LordCommander15/python-app"
 # --namespace arc-runners --from-literal=github_token=<PAT>
 githubConfigSecret: arc-github-secret
 
+# Explicit controller service account - required when controller is in a different namespace
+controllerServiceAccount:
+  namespace: arc-systems
+  name: arc-controller-gha-rs-controller
+
 # Runner scale set name - appears as runner label in GitHub Actions
 runnerScaleSetName: "kind-runner"
 
