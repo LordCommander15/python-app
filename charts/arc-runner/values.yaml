@@ -1,0 +1,61 @@
+# Values for ARC Runner Scale Set (gha-runner-scale-set)
+# Registers self-hosted runners with the GitHub repo and runs jobs in pods
+
+# GitHub repo to register runners with
+githubConfigUrl: "https://github.com/LordCommander15/python-app"
+
+# Reference to the secret containing the GitHub PAT
+# Secret must be created manually: kubectl create secret generic arc-github-secret
+# --namespace arc-runners --from-literal=github_token=<PAT>
+githubConfigSecret: arc-github-secret
+
+# Runner scale set name - appears as runner label in GitHub Actions
+runnerScaleSetName: "kind-runner"
+
+# Min/max runner pods
+minRunners: 0
+maxRunners: 3
+
+# Docker-in-Docker mode for building images
+containerMode:
+  type: "dind"
+
+template:
+  spec:
+    initContainers:
+      - name: init-dind-externals
+        image: ghcr.io/actions/actions-runner:latest
+        command: ["cp", "-r", "-v", "/home/runner/externals/.", "/home/runner/tmpDir/"]
+        volumeMounts:
+          - name: dind-externals
+            mountPath: /home/runner/tmpDir
+    containers:
+      - name: runner
+        image: ghcr.io/actions/actions-runner:latest
+        command: ["/home/runner/run.sh"]
+        env:
+          - name: DOCKER_HOST
+            value: unix:///var/run/docker.sock
+        volumeMounts:
+          - name: work
+            mountPath: /home/runner/_work
+          - name: dind-sock
+            mountPath: /var/run
+      - name: dind
+        image: docker:dind
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: work
+            mountPath: /home/runner/_work
+          - name: dind-sock
+            mountPath: /var/run
+          - name: dind-externals
+            mountPath: /home/runner/externals
+    volumes:
+      - name: work
+        emptyDir: {}
+      - name: dind-sock
+        emptyDir: {}
+      - name: dind-externals
+        emptyDir: {}
