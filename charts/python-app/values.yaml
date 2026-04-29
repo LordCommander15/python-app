@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: testdid15/python-app
-  tag: "v2"
+  tag: "25111236690"
   pullPolicy: IfNotPresent
 
 app:
