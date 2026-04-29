@@ -38,8 +38,9 @@ jobs:
     steps:
       - name: Install Argo CD CLI
         run: |
-          curl -ksSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          chmod +x /usr/local/bin/argocd
+          curl -ksSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x argocd
+          sudo mv argocd /usr/local/bin/argocd
           argocd version --client
 
       - name: Log in to Argo CD
