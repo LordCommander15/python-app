@@ -1,0 +1,11 @@
+site_name: 'python-app'
+site_description: Documentation for the python-app service
+repo_url: https://github.com/text-com/python-app
+edit_uri: edit/main/docs
+
+nav:
+  - Overview:
+    - Getting Started: 'docs/index.md'
+
+plugins:
+  - techdocs-core
