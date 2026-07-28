@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../backstage-dev"
+		},
+		{
+			"path": "../../backstage-software-templates"
+		}
+	],
+	"settings": {}
+}
