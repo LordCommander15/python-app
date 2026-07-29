@@ -1,8 +1,8 @@
 # Values for ARC Runner Scale Set (gha-runner-scale-set)
 # Registers self-hosted runners with the GitHub repo and runs jobs in pods
 
-# GitHub repo to register runners with
-githubConfigUrl: "https://github.com/LordCommander15/python-app"
+# GitHub organization to register runners with (org-level runner serves all repos)
+githubConfigUrl: "https://github.com/lordcommandermv"
 
 # Reference to the secret containing the GitHub PAT
 # Secret must be created manually: kubectl create secret generic arc-github-secret
