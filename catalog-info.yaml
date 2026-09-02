@@ -5,6 +5,7 @@ metadata:
   description: Simple Python application to display time
   annotations:
     github.com/project-slug: LordCommander15/python-app
+    github.com/workflows: cicd.yaml
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
